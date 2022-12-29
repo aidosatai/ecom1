@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - '6379:6379'
+
+  backend:
+    platform: linux/amd64
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./dockerexample:/var/www/ecommerce
+    ports:
+      - "8000:8000"
+    env_file:
+      - env/.db
+    depends_on:
+      - redis
+      - celery
+      - db
+
+  celery:
+    build: .
+    container_name: celery
+    command: celery -A core worker --loglevel=info
+    volumes:
+      - ./dockerexample:/var/www/ecommerce
+    depends_on:
+      - redis
+
+  db:
+    image: postgres
+    container_name: db
+    hostname: db
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
