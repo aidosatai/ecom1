@@ -27,4 +27,4 @@ COPY . $APP_HOME
 #STOPSIGNAL SIGINT
 #CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-ENTRYPOINT ["/home/master/entrypoint.sh"]
+ENTRYPOINT ["/home/master/ecommerce/entrypoint.sh"]
