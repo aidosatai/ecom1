@@ -23,8 +23,8 @@ RUN pip install -r requirements.txt
 
 COPY . $APP_HOME
 
-#EXPOSE 8000
-#STOPSIGNAL SIGINT
-#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+EXPOSE 8000
+STOPSIGNAL SIGINT
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-ENTRYPOINT ["/home/master/ecommerce/entrypoint.sh"]
+#ENTRYPOINT ["/home/master/ecommerce/entrypoint.sh"]
