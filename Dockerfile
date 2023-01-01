@@ -1,5 +1,6 @@
 FROM python:3.9
 
+
 RUN apt-get update && apt-get upgrade -y && apt-get autoremove && apt-get autoclean
 RUN apt-get install -y \
     libffi-dev \
@@ -12,8 +13,8 @@ RUN apt-get install -y \
     net-tools
 
 
-ENV HOME=/home/main/
-ENV APP_HOME=/home/main/ecommerce
+ENV HOME=/home/master/
+ENV APP_HOME=/home/master/ecommerce
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
@@ -25,3 +26,5 @@ COPY . $APP_HOME
 EXPOSE 8000
 STOPSIGNAL SIGINT
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+#ENTRYPOINT ["/home/main/ecommerce/entrypoint.sh"]
