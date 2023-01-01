@@ -66,7 +66,7 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = "Accounts"
         verbose_name_plural = "Accounts"
-        abstract = True
+        abstract = False
 
     def email_user(self, subject, message):
         send_mail(
